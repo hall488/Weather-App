@@ -37,7 +37,7 @@ module.exports = {
     }),
     // Plugin for hot module replacement
     new webpack.HotModuleReplacementPlugin(),
-    new CopyWebpackPlugin({ patterns: [{ from: "src/img", to: "img" }] }),
+    // new CopyWebpackPlugin({ patterns: [{ from: "src/img", to: "img" }] }),
   ],
   output: {
     filename: "[name].bundle.js",

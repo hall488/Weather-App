@@ -5,13 +5,13 @@ import "@fortawesome/fontawesome-free/js/brands";
 
 const inputEL = document.querySelector("input");
 const searchEL = document.querySelector(".search");
+const cityEL = document.querySelector(".city");
 const dateEL = document.querySelector(".date");
 const timeEL = document.querySelector(".time");
 const tempEL = document.querySelector(".temp");
 const feelsEL = document.querySelector(".feels");
 const conditionEL = document.querySelector(".condition");
 const humidityEL = document.querySelector(".humidity");
-const rainEL = document.querySelector(".rain");
 const windEL = document.querySelector(".wind");
 
 const API_KEY = "c5685829d4fe406d88e161048232708";
@@ -27,6 +27,14 @@ const weatherRequest = async (city) => {
   const json = await response.json();
 
   return json;
+};
+
+const formatLocation = (city, region, country) => {
+  if (region !== "") {
+    return `${city}, ${region}, ${country}`;
+  }
+
+  return `${city}, ${country}`;
 };
 
 const formatDate = (date) => {
@@ -59,9 +67,19 @@ const formatTime = (time) => {
 };
 
 const setWeather = (json) => {
+  cityEL.textContent = formatLocation(
+    json.location.name,
+    json.location.region,
+    json.location.country,
+  );
   const [date, time] = json.location.localtime.split(" ");
   dateEL.textContent = formatDate(date);
   timeEL.textContent = formatTime(time);
+  tempEL.textContent = `${json.current.temp_f} °F`;
+  feelsEL.textContent = `${json.current.feelslike_f} °F`;
+  conditionEL.textContent = json.current.condition.text;
+  humidityEL.textContent = `${json.current.humidity} %`;
+  windEL.textContent = `${json.current.wind_mph} mph`;
 };
 
 searchEL.addEventListener("click", () => {
@@ -73,8 +91,7 @@ searchEL.addEventListener("click", () => {
 });
 
 inputEL.addEventListener("keypress", (e) => {
-  const keyCode = e.keyCode || e.which;
-  if (keyCode === 13) {
+  if (e.key === "Enter") {
     console.log("searched");
     weatherRequest(inputEL.value).then((val) => {
       console.log(val);

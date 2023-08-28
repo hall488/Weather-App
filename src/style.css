@@ -9,3 +9,9 @@
     gap: 16px;
     font-size: 24px;
 }
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

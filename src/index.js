@@ -23,17 +23,6 @@ const windEL = document.querySelector(".wind");
 
 const API_KEY = "c5685829d4fe406d88e161048232708";
 
-function svgComponent(source) {
-  const element = document.createElement("object");
-
-  element.data = source;
-  element.type = "image/svg+xml";
-  element.classList += "svg-object";
-  element.style.position = "absolute";
-
-  return element;
-}
-
 const weatherRequest = async (city) => {
   const response = await fetch(
     `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`,
@@ -84,9 +73,19 @@ const formatTime = (time) => {
     : `${parseInt(hour, 10)}:${minute} AM`;
 };
 
+function svgComponent(source) {
+  const element = document.createElement("object");
+
+  element.data = source;
+  element.type = "image/svg+xml";
+  element.classList += "svg-object";
+  element.style.position = "absolute";
+
+  return element;
+}
+
 const dialEL = svgComponent(dial);
-dialEL.style.cssText += `animation: spinZone 3s ease-in-out 1;
-transform: rotate(45deg);`;
+dialEL.classList.add("dial");
 const cloudEL = svgComponent(cloud);
 cloudEL.style.display = "none";
 cloudEL.classList.add("weatherEL", "cloudEL");
@@ -152,7 +151,7 @@ const setWeather = (json) => {
   dateEL.textContent = formatDate(date);
   timeEL.textContent = formatTime(time);
   tempEL.textContent = `Temp: ${json.current.temp_f} °F`;
-  feelsEL.textContent = `Feels Like: ${json.current.feelslike_f} °F`;
+  feelsEL.textContent = `Feels: ${json.current.feelslike_f} °F`;
   conditionEL.textContent = json.current.condition.text;
   humidityEL.textContent = `Humidity: ${json.current.humidity} %`;
   windEL.textContent = `Wind: ${json.current.wind_mph} mph`;
@@ -190,7 +189,7 @@ inputEL.addEventListener("keypress", (e) => {
 });
 
 const mobile = () => {
-  if (document.documentElement.clientWidth < 750) {
+  if (document.documentElement.clientWidth < 860) {
     container.classList.add("mobile");
     [...container.children].forEach((c) => {
       c.classList.add("mobile");

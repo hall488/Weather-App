@@ -103,24 +103,38 @@ input {
 
 object {
     width: 500px;
-    
 }
 
-.mobile > object {
+.mobile > .dial {
     width: 300px;
 }
 
 .weatherEL {
     position: relative;
     bottom: 80%;
-    left: 10%;
+    left: calc(50% - 125px);
     width: 65px;
+}
+
+.mobile > .weatherEL {
+    width: 45px;
+    left: calc(50% - 75px);
 }
 
 .cloudEL {
     bottom: 98%;
     width: 85px;
-    left: 6%
+    left: calc(50% - 132px);
+}
+
+.mobile > .cloudEL {
+    left: calc(50% - 82px);
+    width: 65px;
+}
+
+.dial {
+    animation: spinZone 3s ease-in-out 1;
+    transform: rotate(45deg);;
 }
 
 @keyframes spinZone {

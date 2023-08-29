@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    
+    flex-direction: column;
 }
 
 .container{
@@ -135,6 +135,32 @@ object {
 .dial {
     animation: spinZone 3s ease-in-out 1;
     transform: rotate(45deg);;
+}
+
+.footer {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    width: 100%;
+    font-size: 20px;
+    background-color:whitesmoke;
+    color: black;
+}
+
+.fa-github {
+    color: black    ;
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+    transform: rotate(360deg) scale(1.2);
 }
 
 @keyframes spinZone {
